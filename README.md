@@ -8,5 +8,3 @@ Description:
 
 
 Contributors: Phearak Both Bunna, Sher Chhi Ly, Lalith Shashwath Krishna Shastry, Nathan Balcarcel
-
-All rights reserved.
