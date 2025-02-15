@@ -1,10 +1,9 @@
-# crimson-code2025
+# crimson-code2025 - BL4NC
 
 Theme: Art in Innovation
 
-Project:
+Project: CougarCreate - Interactive Learning Website About UI/UX practices
 
-Description:
-
+Description: Crimson Code 2025 project
 
 Contributors: Phearak Both Bunna, Sher Chhi Ly, Lalith Shashwath Krishna Shastry, Nathan Balcarcel
