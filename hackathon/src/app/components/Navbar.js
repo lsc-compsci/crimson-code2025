@@ -1,7 +1,7 @@
 import Link from "next/link"
 
 
-const Navbar = () => {
+export default function Navbar () {
     return (
     // Navbar
     <nav className="bg-gray-800">
@@ -29,12 +29,10 @@ const Navbar = () => {
 
                 {/* Login */}
                 <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-                    <Link href="/login" className="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700" aria-current="page">Login</Link>
+                    <Link href="/login" className="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-green-600" aria-current="page">Login</Link>
                 </div>
             </div>
         </div>
     </nav>
     );
 };
-
-export default Navbar;
