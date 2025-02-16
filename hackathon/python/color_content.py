@@ -1,5 +1,6 @@
 import base
 import openai
+
 print(openai.api_key) # testing get key
 
 num_questions = 3
@@ -18,12 +19,15 @@ Return the result in valid JSON format like the following example:
 ]
 """
 
-response = openai.Completion.create(
-    model="gpt-3.5-turbo",  # or another model as appropriate
-    prompt=prompt,
-    max_tokens=500,   # adjust based on expected output
-    temperature=0.7   # controls creativity
+response = openai.ChatCompletion.create(
+    model="gpt-4o",  # model name
+    messages=[
+        {"role": "user", "content": prompt}
+    ],
+    max_tokens=500,   # expected output
+    temperature=0.7   # creativity
 )
-generated_text = response.choices[0].text.strip()
+
+generated_text = response.choices[0].message.content.strip()
 
 print(generated_text)
