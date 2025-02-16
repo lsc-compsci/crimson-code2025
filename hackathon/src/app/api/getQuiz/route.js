@@ -1,14 +1,16 @@
 import { NextResponse } from "next/server";
 
-export async function GET() {
+export async function GET(req) {
     const apiKey = process.env.OPENAI_API_KEY;
+    const { searchParams } = new URL(req.url);
+    const topic = searchParams.get("topic") || "Typography";
 
     if (!apiKey) {
         console.error("Missing OpenAI API Key");
         return NextResponse.json({ error: "API key is missing" }, { status: 500 });
     }
 
-    const prompt = `Generate 3 multiple-choice questions about typography with 4 answer options each.
+    const prompt = `Generate 5 multiple-choice questions about ${topic} with 4 answer options each.
     Return a JSON array formatted as follows: 
     [{ "q": "Question text?", "ans": ["A", "B", "C", "D"], "correctAns": "B" }]`;
 
@@ -28,9 +30,9 @@ export async function GET() {
         });
 
         const data = await response.json();
-        console.log("Raw API Response:", data); 
+        console.log("Raw API Response:", data);
 
-        // Ensure data is valid 
+        // Ensure data is valid
         let questions;
         try {
             questions = JSON.parse(data.choices[0].message.content);
