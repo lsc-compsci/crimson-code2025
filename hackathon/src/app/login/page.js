@@ -22,7 +22,7 @@ export default function Login() {
             if (response.ok) {
                 localStorage.setItem("token", data.access_token); // Store token
                 console.log("Login successful!");
-                router.push("/dashboard"); // Redirect after login
+                router.push("/home"); // Redirect after login
             } else {
                 setError(data.detail || "Login failed. Please try again."); // Show error message
             }
