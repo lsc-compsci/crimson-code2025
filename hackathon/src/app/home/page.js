@@ -11,13 +11,13 @@ export default function Homepage() {
             title: "CSS",
             description: "Learn CSS fundamentals and advanced styling.",
             image: "/css.png",
-            link: "/css",
+            link: "/cssCourse",
         },
         {
             title: "Color Theory",
             description: "Master the art of color combinations and harmony.",
             image: "/color-theory.png",
-            link: "/color-theory",
+            link: "/colorTheory",
         },
         {
             title: "Typography",
