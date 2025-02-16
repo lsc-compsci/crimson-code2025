@@ -11,7 +11,6 @@ Generate {num_questions} intermediate level questions on the topic "{topic}" wit
 1. single answer (True/False, Select an answer from the list)
 2. multiple answer questions (Select all that applies)
 3. fill-in-the-blank quesitons.
-True or False questions also fall into single answer question types.
 Return the result in valid JSON format like the following example:
 [
     {{
@@ -42,7 +41,7 @@ response = openai.ChatCompletion.create(
         {"role": "user", "content": prompt}
     ],
     max_tokens=500,   # expected output
-    temperature=0.7   # creativity
+    temperature=0.5  # creativity - deterministic
 )
 
 generated_text = response.choices[0].message.content.strip()
