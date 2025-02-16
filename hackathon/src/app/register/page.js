@@ -1,4 +1,6 @@
+import { Linefont } from "next/font/google";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Register() {
     return (
@@ -44,6 +46,12 @@ export default function Register() {
 
                     <div>
                         <button type="submit" className="flex w-full justify-center rounded-md bg-green-600 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-xs hover:bg-gray-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-400">Register</button>
+                    </div>
+
+                    <div className="flex justify-between">
+                        <Link href="/login" className="font-semibold text-black ml-auto hover:underline">
+                            Back to Login
+                        </Link>
                     </div>
                 </form>
             </div>
