@@ -39,15 +39,11 @@ export default function Navbar() {
                         <div className="hidden sm:ml-6 sm:block">
                             <div className="flex space-x-4">
                                 <Link
-                                    href="/about"
+                                    href="/home"
                                     className="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700">
                                     About Us
                                 </Link>
-                                <Link
-                                    href="/courses"
-                                    className="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700">
-                                    Courses
-                                </Link>
+                                
                             </div>
                         </div>
                     </div>
