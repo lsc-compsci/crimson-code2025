@@ -52,18 +52,34 @@ async def register(user: User):
     users_collection.insert_one({"email": user.email, "password": hashed_password})
     return {"message": "User registered successfully"}
 
+@app.post("/login/")
+async def login(user: User):
+    print("attempting a login")
+    print(user)
+    try:
+        db_user = users_collection.find_one({"email": user.email})
+        print("stage0")
+        if not db_user or not verify_password(user.password, db_user["password"]):
+            print("stage01")
+            raise HTTPException(status_code=401, detail="Invalid credentials")
+        print("stage1")
+        access_token = create_access_token({"sub": user.email}, timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES))
+        print("stage2")
+        return {"access_token": access_token, "token_type": "bearer"}
+    except:
+        print("stage3")
+        raise HTTPException(status_code=420, detail="Our code borked.")
+
+
 #@app.post("/login/")
 #async def login(user: User):
-#    db_user = users_collection.find_one({"email": user.email})
-#    if not db_user or not verify_password(user.password, db_user["password"]):
-#        raise HTTPException(status_code=401, detail="Invalid credentials")
-#    access_token = create_access_token({"sub": user.email}, timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES))
-#    return {"access_token": access_token, "token_type": "bearer"}
+#    print("things are happening")
+#    print(user)
+#
+#    #user = User(data[])
+#    return {"message": "Login successful"}
 
-@app.post("/login/")
-async def login(data: dict):
-    print("things are happening")
-    print(data)
-    return {"message": "Login successful"}
+
+
 
 
