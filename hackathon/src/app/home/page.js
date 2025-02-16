@@ -11,19 +11,19 @@ export default function Homepage() {
             title: "CSS",
             description: "Learn CSS fundamentals and advanced styling.",
             image: "/css.png",
-            link: "/cssCourse",
+            link: "/css_quiz",
         },
         {
             title: "Color Theory",
             description: "Master the art of color combinations and harmony.",
             image: "/color-theory.png",
-            link: "/colorTheory",
+            link: "/color_quiz",
         },
         {
             title: "Typography",
             description: "Explore the world of fonts and typography design.",
             image: "/typography.png",
-            link: "/typography",
+            link: "/typo_quiz",
         },
     ];
 

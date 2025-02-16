@@ -1,7 +1,7 @@
 "use client"
 import { useEffect, useState } from "react";
 
-export default function Quiz() {
+export default function css_quiz() {
     // Track index of current question 
     const [currQuestion, setCurrQuestion] = useState(0);
     // Track user's score

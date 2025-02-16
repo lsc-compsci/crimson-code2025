@@ -2,14 +2,14 @@
 import Link from "next/link"
 import { useRouter } from 'next/navigation';
 import Navbar from "../components/Navbar";
-import Quiz from "../components/typo_quiz";
+import Typo_quiz from "../components/Typo_quiz.js";
 
 export default function courseTypography() {
     return (
         <>
             <Navbar />
             <h1 className="text-black text-2xl text-center p-3 font-bold">Test</h1>
-            <Quiz/>
+            <Typo_quiz/>
         </>
         
     )
