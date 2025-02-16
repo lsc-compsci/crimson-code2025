@@ -1,99 +1,99 @@
-"use client"
-import { useState } from "react";
+import { useState, useEffect } from "react";
+
+// Random questions/answers
+const shuffleArray = (array) => {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]]; 
+    }
+    return array;
+};
 
 export default function Quiz() {
-    // Track index of current question 
     const [currQuestion, setCurrQuestion] = useState(0);
-    // Track user's score
     const [score, setScore] = useState(0);
-    // Whether quiz is done and show score
     const [showScore, setShowScore] = useState(false);
+    const [questions, setQuestions] = useState([]);
+    const [loading, setLoading] = useState(true);
 
-    // array of questions, options & answers
-    // will fetch from API later
-    const questions = [
-        {
-            q: "Is a cat a dog?",
-            ans: [
-                "True",
-                "False",
-            ],
-            correctAns: "False",
-        },
+    useEffect(() => {
+        const fetchQuestions = async () => {
+            setLoading(true);
+            try {
+                const response = await fetch("/api/getQuiz");
+                const data = await response.json();
+                
+                console.log("Fetched Questions:", data.questions); 
+                
+                // Shuffle questions
+                const shuffledQuestions = shuffleArray(data.questions);
 
-        {
-            q: "Which of the following is a serif font?",
-            ans: ["Comic Sans", "Times New Roman", "Arial", "Helvetica"],
-            correctAns: "Times New Roman",
-        },
-    ];
+                // Shuffle answers for each question
+                const shuffledQuestionsWithAnswers = shuffledQuestions.map((question) => ({
+                    ...question,
+                    ans: shuffleArray(question.ans),
+                }));
 
-    // Handle user selection
+                setQuestions(shuffledQuestionsWithAnswers); 
+            } catch (error) {
+                console.error("Error fetching questions:", error);
+            }
+            setLoading(false);
+        };
+        fetchQuestions();
+    }, []);
+
     const handleSelect = (selectedAns) => {
-        // Check whether selection is correct
-        if (selectedAns === questions[currQuestion].correctAns) {
-            setScore(score + 1);
+        if (selectedAns === questions[currQuestion]?.correctAns) {
+            setScore((prev) => prev + 1);
         }
-        // Go to next question
         const nextQuestion = currQuestion + 1;
         if (nextQuestion < questions.length) {
-            setCurrQuestion(nextQuestion)
-        }
-        else {
-            // show final score
+            setCurrQuestion(nextQuestion);
+        } else {
             setShowScore(true);
         }
     };
 
-    // Restart quiz
     const restart = () => {
         setCurrQuestion(0);
         setScore(0);
         setShowScore(false);
     };
 
+    if (loading) {
+        return <p className="text-center text-black">Loading questions...</p>;
+    }
+
     return (
-        <>
-            <div className="max-w-2xl mx-auto rounded-lg">
-                {/* Show score if quiz is done */}
-                {showScore ? (
-                    <div className="text-center">
-                        <h2 className="text-2xl font-bold text-gray-700">
-                            Your Score: {score} / {questions.length}
-                        </h2>
-                        {/* Restart quiz */}
-                        <button
-                            onClick={restart}
-                            className="mt-4 px-4 py-2 bg-blue-500">
-                            Restart Quiz
-                        </button>
+        <div className="max-w-2xl mx-auto rounded-lg">
+            {showScore ? (
+                <div className="text-center">
+                    <h2 className="text-2xl font-bold text-gray-700">
+                        Your Score: {score} / {questions.length}
+                    </h2>
+                    <button onClick={restart} className="mt-4 px-4 py-2 bg-blue-500">
+                        Restart Quiz
+                    </button>
+                </div>
+            ) : (
+                <div>
+                    <h2 className="text-xl font-bold text-gray-800">
+                        Question {currQuestion + 1} of {questions.length}
+                    </h2>
+                    <p className="mt-4 text-gray-600">{questions[currQuestion]?.q}</p>
+                    <div className="mt-6 space-y-4">
+                        {questions[currQuestion]?.ans?.map((option, index) => (
+                            <button
+                                key={index}
+                                onClick={() => handleSelect(option)}
+                                className="w-full px-4 py-2 bg-gray-100 text-gray-800 rounded-md hover:bg-gray-200">
+                                {option}
+                            </button>
+                        ))}
                     </div>
-
-                ) : (
-
-                    // Display the current question and options if the quiz is ongoing
-                    <div>
-                        <h2 className="text-xl font-bold text-gray-800">
-                            Question {currQuestion + 1} of {questions.length}
-                        </h2>
-                        <p className="mt-4 text-gray-600">
-                            {questions[currQuestion].q}
-                        </p>
-                        <div className="mt-6 space-y-4">
-                            {/* Map through the options for the current question */}
-                            {questions[currQuestion].ans.map((option, index) => (
-                                <button
-                                    // Uniuque key for each option 
-                                    key={index} 
-                                    onClick={() => handleSelect(option)} 
-                                    className="w-full px-4 py-2 bg-gray-100 text-gray-800 rounded-md hover:bg-gray-200">
-                                    {option}
-                                </button>
-                            ))}
-                        </div>
-                    </div>
-                )}
-            </div>
-        </>
+                </div>
+            )}
+        </div>
     );
 }
