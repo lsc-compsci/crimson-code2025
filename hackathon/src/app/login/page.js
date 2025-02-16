@@ -120,6 +120,8 @@ export default function Login() {
                 <Link href="/register" className="font-semibold text-black hover:underline rounded-md p-1"> Register</Link>
             </p>
         </div>
+      </div>
     );
 }
+
 
