@@ -3,7 +3,7 @@ import openai
 
 print(openai.api_key) # testing get key
 
-num_questions = 3
+num_questions = 5
 topic = "Typography Principles"
 
 prompt = f"""
