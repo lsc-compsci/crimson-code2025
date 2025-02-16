@@ -2,7 +2,7 @@
 
 Theme: Art in Innovation
 
-Project: CougarCreate - Interactive Learning Website About UI/UX practices
+Project: TISM - Interactive Learning Website About UI/UX practices
 
 Description: Crimson Code 2025 project
 

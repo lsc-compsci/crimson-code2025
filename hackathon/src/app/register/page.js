@@ -1,58 +1,129 @@
-import { Linefont } from "next/font/google";
+"use client";
+
+import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
 export default function Register() {
+    const [email, setEmail] = useState("");
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
+    const [confirmPassword, setConfirmPassword] = useState("");
+    const [error, setError] = useState("");
+    const [success, setSuccess] = useState("");
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        if (password !== confirmPassword) {
+            setError("Passwords do not match");
+            return;
+        }
+
+        try {
+            const response = await fetch("http://127.0.0.1:8000/register/", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ email, username, password }),
+            });
+
+            const data = await response.json();
+            if (response.ok) {
+                setSuccess("Registration successful! You can now log in.");
+                setError("");
+            } else {
+                setError(data.detail || "Registration failed");
+            }
+        } catch (err) {
+            setError("Something went wrong. Please try again.");
+        }
+    };
+
     return (
         <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
             <div className="sm:mx-auto sm:w-full sm:max-w-sm">
                 <img className="mx-auto h-10 w-auto" src="cougar-head.jpg" alt="Coug Creative" />
-                <h2 className="mt-10 text-center text-2xl/9 font-bold tracking-tight text-gray-900">Register</h2>
+                <h2 className="mt-10 text-center text-2xl/9 font-bold tracking-tight text-gray-900">
+                    Register
+                </h2>
             </div>
 
             <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-                <form className="space-y-6" action="#" method="POST">
-                    {/* Email */}
-                    <div>
-                        <label htmlFor="email" className="block text-sm/6 font-medium text-gray-900">Email address</label>
-                        <div className="mt-2">
-                            <input type="email" name="email" id="email" autoComplete="email" required className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-gray-300 sm:text-sm/6" />
-                        </div>
-                    </div>
-                    {/* Username */}
-                    <div>
-                        <label htmlFor="username" className="block text-sm/6 font-medium text-gray-900">Username</label>
-                        <div className="mt-2">
-                            <input type="text" name="username" id="username" autoComplete="username" required className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-gray-300 sm:text-sm/6" />
-                        </div>
-                    </div>
-                    {/* Password */}
-                    <div>
-                        <div className="flex items-center justify-between">
-                            <label htmlFor="password" className="block text-sm/6 font-medium text-gray-900">Password</label>
-                        </div>
+                <form className="space-y-6" onSubmit={handleSubmit}>
+                    {error && <p className="text-red-500 text-sm">{error}</p>}
+                    {success && <p className="text-green-500 text-sm">{success}</p>}
 
-                        <div className="mt-2">
-                            <input type="password" name="password" id="password" required className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-gray-400 sm:text-sm/6" />
-                        </div>
-                    </div>
-                    {/* Confirm password */}
                     <div>
-                        <label htmlFor="password" className="block text-sm/6 font-medium text-gray-900">Confirm Password</label>
-                        <div className="mt-2">
-                            <input type="password" name="confirmpwd" id="confirmpwd" required className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-gray-300 sm:text-sm/6" />
-                        </div>
+                        <label htmlFor="email" className="block text-sm font-medium text-gray-900">
+                            Email address
+                        </label>
+                        <input
+                            type="email"
+                            id="email"
+                            required
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            className="mt-2 block w-full rounded-md bg-white px-3 py-1.5 text-gray-900 outline-gray-300"
+                        />
                     </div>
 
                     <div>
-                        <button type="submit" className="flex w-full justify-center rounded-md bg-green-600 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-xs hover:bg-gray-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-400">Register</button>
+                        <label htmlFor="username" className="block text-sm font-medium text-gray-900">
+                            Username
+                        </label>
+                        <input
+                            type="text"
+                            id="username"
+                            required
+                            value={username}
+                            onChange={(e) => setUsername(e.target.value)}
+                            className="mt-2 block w-full rounded-md bg-white px-3 py-1.5 text-gray-900 outline-gray-300"
+                        />
                     </div>
 
-                    <div className="flex justify-between">
-                        <Link href="/login" className="font-semibold text-black ml-auto hover:underline">
-                            Back to Login
+                    <div>
+                        <label htmlFor="password" className="block text-sm font-medium text-gray-900">
+                            Password
+                        </label>
+                        <input
+                            type="password"
+                            id="password"
+                            required
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            className="mt-2 block w-full rounded-md bg-white px-3 py-1.5 text-gray-900 outline-gray-300"
+                        />
+                    </div>
+
+                    <div>
+                        <label htmlFor="confirmpwd" className="block text-sm font-medium text-gray-900">
+                            Confirm Password
+                        </label>
+                        <input
+                            type="password"
+                            id="confirmpwd"
+                            required
+                            value={confirmPassword}
+                            onChange={(e) => setConfirmPassword(e.target.value)}
+                            className="mt-2 block w-full rounded-md bg-white px-3 py-1.5 text-gray-900 outline-gray-300"
+                        />
+                    </div>
+
+                    <div>
+                        <button
+                            type="submit"
+                            className="flex w-full justify-center rounded-md bg-green-600 px-3 py-1.5 text-sm font-semibold text-white shadow-xs hover:bg-gray-500"
+                        >
+                            Register
+                        </button>
+                    </div>
+
+                    <p className="mt-10 text-center text-sm text-gray-500">
+                        Already have an account?{" "}
+                        <Link href="/login" className="font-semibold text-black hover:underline">
+                            Sign in
                         </Link>
-                    </div>
+                    </p>
                 </form>
             </div>
         </div>
