@@ -7,7 +7,7 @@ num_questions = 5
 topic = "Typography Principles"
 
 prompt = f"""
-Generate {num_questions} multiple-choice questions on the topic "{topic}" with two question types, single answer or multiple answer questions.
+Generate {num_questions} beginner to intermedate level questions on the topic "{topic}" with two question types, single answer or multiple answer questions.
 True or False questions also fall into single answer question types.
 Return the result in valid JSON format like the following example:
 [
