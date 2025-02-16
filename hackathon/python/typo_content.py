@@ -4,7 +4,7 @@ import openai
 print(openai.api_key) # testing get key
 
 num_questions = 3
-topic = "Typography"
+topic = "Typography Principles"
 
 prompt = f"""
 Generate {num_questions} multiple-choice questions on the topic "{topic}".
