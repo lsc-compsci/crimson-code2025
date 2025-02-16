@@ -48,7 +48,7 @@ export default function Homepage() {
             {/* Learning topics */}
             <div className="container mx-auto px-4 py-8">
                 <h1 className="text-3xl font-bold mb-6 text-black text-center">Explore Courses</h1>
-                <div className="grid gap-6 md:grid-cols-3">
+                <div className="grid gap-6 md:grid-cols-3 pt-5">
                     {topics.map((topic, idx) => (
                         <TopicCard
                             key={topic.title}
@@ -67,7 +67,7 @@ export default function Homepage() {
                             key={course.title}
                             className="bg-white rounded shadow p-4 flex items-center hover:bg-green-400 transition"
                         >
-                            {/* Thumbnail (optional) */}
+                            {/* Thumbnail */}
                             <div className="w-20 h-20 relative mr-4 flex-shrink-0">
                                 <Image
                                     src={course.image}

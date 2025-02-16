@@ -16,9 +16,13 @@ export default {
           '0%': { opacity: 0, transform: 'translateY(10px)' },
           '100%': { opacity: 1, transform: 'translateY(0)' },
         },
+        typewriter: {
+          '0%': { width: '0' },
+          '100%': { width: '100%' },
+        },
       },
       animation: {
-        fadeInUp: 'fadeInUp 0.5s ease-out forwards',
+        typewriter: 'typewriter 4s steps(144) 1s forwards',
       },
     },
   },

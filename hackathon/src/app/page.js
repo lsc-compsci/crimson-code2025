@@ -1,40 +1,56 @@
 import Image from "next/image";
 import Link from "next/link";
-import Navbar from './components/Navbar'
+import Navbar from './components/Navbar';
 
 export default function Landing() {
   return (
-    <>
-      <nav className="bg-gray-800">
-        <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
-          <div className="relative flex h-16 items-center justify-between">
-            <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
-              {/* Mobile menu button */}
-              <button type="button" className="relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:ring-2 focus:ring-white focus:outline-hidden focus:ring-inset" aria-controls="mobile-menu" aria-expanded="false">
-                <span className="absolute -inset-0.5"></span>
-                <span className="sr-only">Open main menu</span>
-                <svg className="hidden size-6" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M6 18 18 6M6 6l12 12" />
-                </svg>
-              </button>
-            </div>
+    <div className="bg-gradient-to-r from-indigo-600 via-purple-500 to-pink-500 min-h-screen text-white">
+      <header className="flex justify-center items-center h-screen bg-cover bg-center relative"
+        style={{ backgroundImage: "url('/path-to-your-background-image.jpg')" }}>
+        <div className="absolute inset-0 bg-black opacity-50"></div>
+        <div className="relative z-10 text-center">
+          <h3 className="text-xs md:text-3xl mb-4 text-white overflow-hidden">
+            Technology & Innovation System Machine
+          </h3>
+          <h1 className="text-5xl md:text-6xl font-bold mb-4 text-white overflow-hidden">
+            Master the Art of Design and Innovation.
+          </h1>
+          <p className="text-sm md:text-2xl mb-24 text-white overflow-hidden mt-4">
+            {/* Learn CSS, Typography, and Color Theory to create stunning designs. */}
+            CSS | Color Theory | Typography Principles
+          </p>
 
-            <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
-              <div className="hidden sm:ml-6 sm:block">
-                <div className="flex space-x-4">
-                  <a href="#" className="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700" aria-current="page">About Us</a>
-                  <a href="#" className="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Courses</a>
-                </div>
-              </div>
-            </div>
+          <Link href="/login" className="mt-4 bg-green-600 text-white py-3 px-8 rounded-lg text-xl font-medium transition hover:bg-green-700">
+            Start Learning Today!
+          </Link>
+        </div>
+      </header>
 
-            {/* Login */}
-            <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-              <Link href="/login" className="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-green-600" aria-current="page">Login</Link>
+      <section className="py-16 px-4 bg-white text-gray-800">
+        <div className="max-w-7xl mx-auto text-center">
+          <h2 className="text-3xl font-semibold mb-6">Why Learn with Us?</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className=" bg-gray-100 p-6 rounded-lg shadow-md transform transition duration-300 hover:scale-105 hover:shadow-xl cursor-pointer">
+              <h3 className="text-xl font-bold mb-2">CSS Mastery</h3>
+              <p>Build responsive and modern websites by mastering CSS fundamentals and advanced techniques.</p>
+            </div>
+            <div className="bg-gray-100 p-6 rounded-lg shadow-md transform transition duration-300 hover:scale-105 hover:shadow-xl cursor-pointer">
+              <h3 className="text-xl font-bold mb-2">Typography Expertise</h3>
+              <p>Learn the principles of typography to create readable and aesthetically pleasing designs.</p>
+            </div>
+            <div className="bg-gray-100 p-6 rounded-lg shadow-md transform transition duration-300 hover:scale-105 hover:shadow-xl cursor-pointer">
+              <h3 className="text-xl font-bold mb-2">Color Theory</h3>
+              <p>Understand the science of color to design harmonious and visually striking palettes.</p>
             </div>
           </div>
         </div>
-      </nav>
-    </>
+      </section>
+
+      <footer className="bg-gray-900 text-gray-300 py-8">
+        <div className="max-w-7xl mx-auto text-center">
+          <p>&copy; {new Date().getFullYear()} TISM - Project BL4NC | All Rights Reserved</p>
+        </div>
+      </footer>
+    </div>
   );
 }
