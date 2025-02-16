@@ -1,5 +1,5 @@
 "use client"
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function Quiz() {
     // Track index of current question 
@@ -9,24 +9,25 @@ export default function Quiz() {
     // Whether quiz is done and show score
     const [showScore, setShowScore] = useState(false);
 
-    // array of questions, options & answers
-    // will fetch from API later
-    const questions = [
+    // fetch questions from api
+    useEffect(() => 
+    {
+        async function fetchQuestions()
         {
-            q: "Is a cat a dog?",
-            ans: [
-                "True",
-                "False",
-            ],
-            correctAns: "False",
-        },
+            try
+            {
+                const res = await fetch("http://localhost:3000/css_quiz");
+                const data = await res.json();
+                setCurrQuestion(data);
+            }
+            catch
+            {
+                console.error("Error fetching quiz data:", error);
+            }
+        }
 
-        {
-            q: "Which of the following is a serif font?",
-            ans: ["Comic Sans", "Times New Roman", "Arial", "Helvetica"],
-            correctAns: "Times New Roman",
-        },
-    ];
+        fetchQuestions();
+    }, []);
 
     // Handle user selection
     const handleSelect = (selectedAns) => {
@@ -83,7 +84,7 @@ export default function Quiz() {
                             {/* Map through the options for the current question */}
                             {questions[currQuestion].ans.map((option, index) => (
                                 <button
-                                    // Uniuque key for each option 
+                                    // Unique key for each option 
                                     key={index} 
                                     onClick={() => handleSelect(option)} 
                                     className="w-full px-4 py-2 bg-gray-100 text-gray-800 rounded-md hover:bg-gray-200">
