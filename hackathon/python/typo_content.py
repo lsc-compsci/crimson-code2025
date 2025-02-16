@@ -28,7 +28,7 @@ Return the result in valid JSON format like the following example:
         "options": ["True", "False"],
         "answer": "False",
     }},
-
+    
     ...
 ]
 """
