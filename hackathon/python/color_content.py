@@ -9,7 +9,10 @@ topic = "Color Theory"
 # question types: 1 - one answer; 2 - multiple answers
 
 prompt = f"""
-Generate {num_questions} intermediate level questions on the topic "{topic}" with three question types, single answer or multiple answer questions, and fill-in-the-blank quesitons.
+Generate {num_questions} intermediate level questions on the topic "{topic}" with three question types:
+1. single answer (True/False, Select an answer from the list)
+2. multiple answer questions (Select all that applies)
+3. fill-in-the-blank quesitons.
 True or False questions also fall into single answer question types.
 Return the result in valid JSON format like the following example:
 [
