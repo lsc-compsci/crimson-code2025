@@ -3,11 +3,14 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 export default function Login() {
   // State for user input
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const router = useRouter();
 
   // Function to handle login
   const login = async (email, password) => {
@@ -19,8 +22,9 @@ export default function Login() {
       });
       const data = await response.json();
       if (response.ok) {
-        localStorage.setItem("token", data.access_token);
+        //localStorage.setItem("token", data.access_token);
         console.log("Login successful!");
+        router.push("/home");
       } else {
         console.error("Login failed:", data.detail);
       }
