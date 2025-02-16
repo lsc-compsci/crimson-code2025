@@ -5,6 +5,13 @@ from pymongo import MongoClient
 from passlib.context import CryptContext
 from jose import JWTError, jwt
 from datetime import datetime, timedelta
+from dotenv import load_dotenv
+
+# import from python scripts for quiz contents
+import color_content
+import css_content
+import typo_content
+
 
 # MongoDB setup
 client = MongoClient("mongodb://localhost:27017/")
@@ -72,6 +79,17 @@ async def login(user: User):
     #    print("stage3")
     #    raise HTTPException(status_code=420, detail="Our code borked.")
 
+@app.get("/color-quiz")
+def get_color_quiz():
+    return color_content.prompt
+
+@app.get("/css-quiz")
+def get_css_quiz():
+    return css_content.prompt
+
+@app.get("/typo-quiz")
+def get_typo_quiz():
+    return typo_content.prompt
 
 #@app.post("/login/")
 #async def login(user: User):
@@ -80,8 +98,3 @@ async def login(user: User):
 #
 #    #user = User(data[])
 #    return {"message": "Login successful"}
-
-
-
-
-
