@@ -2,7 +2,7 @@
 
 Theme: Art in Innovation
 
-Project: TISM - Interactive Learning Website About UI/UX practices
+Project: TISM (Technology & Innovation Systems Machine) - Interactive Learning Website About UI/UX practices
 
 Description: Crimson Code 2025 project
 
